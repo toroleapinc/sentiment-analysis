@@ -5,7 +5,7 @@ import os
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from .preprocess import clean_text
-from .features import bow_features, tfidf_features
+from .features import bow_features, tfidf_features, word2vec_features
 from .models import train_svm, train_logreg, train_nb
 
 def main():
@@ -30,6 +30,11 @@ def main():
     bow_vec, X_train_bow = bow_features(X_train_text)
     svm_bow = train_svm(X_train_bow, y_train)
     nb = train_nb(X_train_bow, y_train)
+
+    # Word2Vec (experimental)
+    # print("\n=== Word2Vec features ===")
+    # w2v_model, X_train_w2v = word2vec_features(X_train_text)
+    # TODO: word2vec eval - it's slower and didn't beat TF-IDF
 
     os.makedirs('models', exist_ok=True)
     with open('models/best_svm.pkl', 'wb') as f:
