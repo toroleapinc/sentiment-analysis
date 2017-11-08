@@ -31,10 +31,9 @@ def main():
     svm_bow = train_svm(X_train_bow, y_train)
     nb = train_nb(X_train_bow, y_train)
 
-    # Word2Vec (experimental)
-    # print("\n=== Word2Vec features ===")
-    # w2v_model, X_train_w2v = word2vec_features(X_train_text)
-    # TODO: word2vec eval - it's slower and didn't beat TF-IDF
+    print("\n=== Word2Vec features ===")
+    w2v_model, X_train_w2v = word2vec_features(X_train_text)
+    svm_w2v = train_svm(X_train_w2v, y_train)
 
     os.makedirs('models', exist_ok=True)
     with open('models/best_svm.pkl', 'wb') as f:
